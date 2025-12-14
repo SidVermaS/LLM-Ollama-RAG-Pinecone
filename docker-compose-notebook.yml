@@ -1,0 +1,42 @@
+services:
+  jupyter-notebook:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.notebook
+    container_name: jupyter-notebook
+    ports:
+      - "8888:8888"
+    env_file: .env
+    volumes:
+      - ./notebook:/workspace
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8888')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  ollama:
+    image: ollama/ollama:0.13.2
+    container_name: ollama-0.13.2
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    depends_on:
+      jupyter-notebook:
+        condition: service_healthy
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
+    command: 
+      - |
+        /bin/ollama serve & OLLAMA_PID=$!
+        sleep 5
+        ollama pull nomic-embed-text
+        ollama pull llama3.2:1b
+        wait $OLLAMA_PID
+
+
+volumes:
+  ollama-data:

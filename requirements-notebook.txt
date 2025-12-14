@@ -1,0 +1,17 @@
+# Jupyter
+jupyterlab==4.5.0
+notebook==7.5.0
+
+# LangChain
+langchain==1.1.3
+langchain-community==0.4.1
+langchain-ollama==1.0.0
+langchain-core==1.1.2
+langchain-pinecone==0.2.13
+
+# Vector DB
+pinecone==7.3.0
+
+# Python utilities
+python-dotenv==1.2.1
+pypdf==6.4.1

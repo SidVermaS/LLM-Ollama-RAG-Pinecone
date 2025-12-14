@@ -1,0 +1,95 @@
+.env
+# ============================
+# Python bytecode & caches
+# ============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+*.pyo
+
+# ============================
+# Jupyter Notebook
+# ============================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Jupyter runtime files
+.jupyter/
+.jupyter/lab/*
+.jupyter/lab/workspaces/*
+
+# VS Code settings (if using VSCode for notebooks)
+.vscode/
+
+# ============================
+# Environment / Virtual Env
+# ============================
+.env
+.env.local
+.env.dev
+.env.development
+.env.prod
+.env.production
+.env.test
+.env.testing
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# ============================
+# Data files (optional)
+# Uncomment if you don't want large data tracked
+# ============================
+# data/
+# *.csv
+# *.tsv
+# *.parquet
+# *.h5
+# *.pkl
+# *.joblib
+
+# ============================
+# Logs & dumps
+# ============================
+*.log
+*.out
+*.err
+
+# ============================
+# OS-specific
+# ============================
+.DS_Store
+Thumbs.db
+
+# ============================
+# Docker
+# ============================
+Dockerfile
+docker-compose.yml
+*.pid
+
+# Ignore local notebook kernelspecs
+.ipynb_kernel/
+
+# ============================
+# Python build artifacts
+# ============================
+build/
+dist/
+*.egg-info/
+*.egg

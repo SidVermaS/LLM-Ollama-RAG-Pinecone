@@ -1,0 +1,25 @@
+ARG BASE_IMAGE=python:3.13-slim
+# 1. Build Stage
+FROM ${BASE_IMAGE} AS builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-notebook.txt .
+RUN pip install --user --no-cache-dir -r requirements-notebook.txt
+
+# 2. Runtime Stage
+FROM ${BASE_IMAGE} AS Runtime
+
+COPY --from=builder /root/.local /root/.local
+COPY . .
+
+ENV PATH=/root/.local/bin:$PATH
+
+# Jupyter will serve from /workspace;
+WORKDIR /workspace
+
+EXPOSE 8888
+
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
